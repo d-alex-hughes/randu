@@ -1,0 +1,34 @@
+---
+title: "Bad Randu"
+author: "D. Alex Hughes"
+date: "6/3/2020"
+output: html_document
+---
+
+```{r load packages, warning=FALSE, message=FALSE}
+library(plotly)
+library(magrittr)
+```
+
+```{r build function}
+seed <- as.double(1)
+RANDU <- function() {
+  seed <<- ((2^16 + 3) * seed) %% (2^31)
+  seed/(2^31)
+}
+```
+
+```{r make data}
+U <- c(RANDU(), RANDU(), RANDU())
+for(i in 1:4000) {
+  U <- rbind(U, c(RANDU(), RANDU(), RANDU()))
+}
+U <- data.frame(U)
+
+```
+
+```{r plot data}
+U %>%  
+  plot_ly(x = ~X1, y = ~X2, z = ~X3) %>%  
+  add_markers(size = 1, color = '#003262')
+```
