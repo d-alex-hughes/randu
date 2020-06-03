@@ -5,6 +5,11 @@ date: "6/3/2020"
 output: html_document
 ---
 
+```{r}
+install.packages('plotly')
+```
+
+
 ```{r load packages, warning=FALSE, message=FALSE}
 library(plotly)
 library(magrittr)
@@ -30,5 +35,9 @@ U <- data.frame(U)
 ```{r plot data}
 U %>%  
   plot_ly(x = ~X1, y = ~X2, z = ~X3) %>%  
-  add_markers(size = 1, color = '#003262')
+  add_markers(
+    marker = list(
+      size = 1, 
+      color = '#003262')
+  )
 ```
